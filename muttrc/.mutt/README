@@ -1,0 +1,8 @@
+You can use these example files by doing:
+
+	mkdir ~/.mutt/rc/private/
+	cp -p ~/.mutt/rc/muttrc_score.example ~/.mutt/rc/private/muttrc_score
+	cp -p ~/.mutt/rc/muttrc_gmail_private.example ~/.mutt/rc/private/muttrc_gmail
+
+Start `mutt` using:
+	mutt -e 'source ~/.mutt/rc/muttrc_gmail' -e 'source ~/.mutt/color/colorscheme'
