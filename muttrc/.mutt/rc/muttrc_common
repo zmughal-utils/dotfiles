@@ -1,0 +1,122 @@
+set xterm_set_titles = yes
+set query_command="lbdbq '%s' 2>/dev/null"
+set date_format="!%F at %H:%M:%S %Z"
+
+#set index_format="%4C %Z %2N %{%b %d} %-15.15L (%?l?%4l&%4c?) %?y?{%-10.10y} ?%s"
+# need to look for deepif patch so that I can use %M,%l,%c in one statement
+# <http://home.uchicago.edu/~dgc/mutt/#deepif>
+# <http://www.mail-archive.com/mutt-dev@mutt.org/msg00493.html>
+set index_format="%4C %Z %3N %{%b %d} %-15.15L (%?M?[%2M]&%4c?) %?y?{%-10.10y} ?%s"
+# %y <-> %Y
+# changes threaded messages
+
+unignore X-Label X-Homepage Message-ID User-Agent
+hdr_order Date From To Cc Message-ID User-Agent X-Homepage X-Label
+
+set header_cache=~/.mutt/cache/headers
+set message_cachedir=~/.mutt/cache/bodies
+set certificate_file=~/.mutt/certificates
+
+set pager_index_lines=5
+
+# this prevents Mutt from endlessly asking:
+#     "~/Mail does not exist. Create it? ([yes]/no):"
+set folder=""
+
+set mail_check=60	# one minute; for slow connections
+#set mail_check=15
+set timeout=45
+
+auto_view text/html
+alternative_order text/enriched text/plain text application/postscript image/*
+
+# answer yes to send entire mail as RFC822 attachment instead of just
+# main part
+# <http://linuxmafia.com/faq/Mail/mutt-forwarding-attachments.html>
+set mime_forward = ask-no
+
+# For the stupids that send incorrect charsets
+charset-hook ^iso-8859-1$ cp1252
+
+#set sort = 'reverse-threads'
+set sort = 'threads'
+#set sort_aux = 'last-date-received'
+set sort_aux = 'reverse-score'
+
+macro index \'s	 '<enter-command>set sort_aux='reverse-score'<return>'
+macro index \'S	 '<enter-command>set sort_aux='last-date'<return>'
+
+macro index ,r	'<enter-command>exec limit<return>~d<1w<return>'
+
+bind index ,j	sidebar-scroll-down
+bind index ,k	sidebar-scroll-up
+bind index \CP sidebar-prev
+bind index \CN sidebar-next
+bind index \CO sidebar-open
+bind pager \CP sidebar-prev
+bind pager \CN sidebar-next
+bind pager \CO sidebar-open
+macro index B '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager B '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+bind index <Esc><Esc> collapse-all
+
+unset wait_key
+
+# From <http://wiki.mutt.org/?MuttGuide/Macros>
+# set my_wait_key=$wait_key<enter><enter-command>
+# and
+# <enter-command>set wait_key=$my_wait_key<enter>
+# macro index,pager <f1> '<enter-command>set my_wait_key=$wait_key<enter><enter-command>unset wait_key<enter><shell-escape>less /usr/local/doc/mutt/manual.txt<enter><enter-command>set wait_key=$my_wait_key<enter>'
+macro index,attach,pager,compose ,v	'<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<pipe-message>pipe.vim<space>-c<space>"setf<space> txt"<space>1>/dev/null<return>\
+<enter-command>set wait_key=$my_wait_key<enter>'	"Vim"
+#macro index,attach,pager ,l	'<enter-command>set my_wait_key=$wait_key<enter><enter-command>unset wait_key<return><pipe-message>lynx<space>-stdin<return><enter-command>set wait_key=$my_wait_key<enter>'
+macro index,attach,pager,compose ,l	'<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<pipe-message>elinks<space>-force-html<return>\
+<enter-command>set wait_key=$my_wait_key<enter>'	"Elinks browser"
+macro index,attach,pager,compose ,f	'<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<pipe-message>pipe_into_firefox<return>\
+<enter-command>set wait_key=$my_wait_key<enter>'	"Firefox browser"
+
+source ~/.mutt/rc/private/muttrc_alternate
+source ~/.mutt/rc/private/muttrc_group
+source ~/.mutt/rc/private/muttrc_hdr
+source ~/.mutt/rc/private/muttrc_score
+source ~/.mutt/rc/private/muttrc_list
+
+macro index ,a	'<enter-command>exec limit<return>~A<return>'	"All mail"
+macro index ,N	'<enter-command>exec limit<return>~(~O|~N|~F)<return>'	"Old, new, flagged"
+macro index ,o	'<enter-command>exec limit<return>!%L<space>friend<space>!%L<space>family<space>!%L<space>acquaintance<return>' "Not friend, family, acquaintance"
+macro index ,O	'<enter-command>exec limit<return>!%L<space>friend<space>!%L<space>family<space>!%L<space>acquaintance<space>!%L<space>social<space>!%L<space>CBL<return>' "Not friend, family, acquaintance, social, CBL"
+
+macro index,pager \\D	"<tag-prefix><clear-flag>O<sync-mailbox><tag-prefix><delete-message>"	"Mark as read and delete"
+
+# <http://www.mail-archive.com/mutt-users@mutt.org/msg38662.html>
+#folder-hook . 'set my_oldrecord=$record; set record=^; set my_folder=$record; set record=$my_oldrecord'
+#folder-hook . 'macro index Z :push\ \":\\\`$HOME/.mutt/rc/script/cs-mutt-per-folder\ $my_folder\\\`\\\<enter\\\>\"<enter>; push Z'
+
+macro index,pager ,m "<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<shell-escape>"$HOME/.mutt/rc/script/mutt_limit_gen"\
+<enter><enter-command>set wait_key=$my_wait_key<enter>\
+<enter-command>push \`cat $HOME/.mutt/tmp_limit\`<enter>" "Limit generator"
+macro index,pager ,M "<enter-command>exec limit<return>\Cu~A<return>,m" "Limit generator, clear first"
+
+macro index,pager ,t "<enter-command>\
+set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<shell-escape>"$HOME/.mutt/rc/script/mutt_index_gen"<enter>\
+<enter-command>set wait_key=$my_wait_key<enter>\
+<enter-command>push \`cat $HOME/.mutt/tmp_index\`<enter>" "Index generator"
+macro index,pager <F2> "<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<enter-command>set my_nop=\"\`$HOME/.mutt/rc/script/mutt_index_gen<space>-n\`\"<enter>\
+<enter-command>set wait_key=$my_wait_key<enter>\
+<enter-command>push \`cat $HOME/.mutt/tmp_index\`<enter>" "Index switcher"
+
+macro index ,,h	'<shell-escape>~/.mutt/rc/script/rm_cache<return>'	"remove cached headers"
+

@@ -1,0 +1,8 @@
+set imap_user = "user@gmail.com"
+set imap_pass = "password"
+
+set smtp_pass = "password"
+set from = "user@gmail.com"
+set realname = "First Last"
+set use_from=yes
+my_hdr X-Homepage: http://example.com/

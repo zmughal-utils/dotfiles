@@ -1,0 +1,11 @@
+# Gmail .muttrc
+
+source ~/.mutt/rc/muttrc_common
+source ~/.mutt/rc/muttrc_gmail_common
+source ~/.mutt/rc/private/muttrc_gmail
+source ~/.mutt/rc/private/muttrc_currentsem
+source ~/.mutt/rc/private/muttrc_gmail_list
+
+source ~/.mutt/rc/private/muttrc_gmail_mailboxes_gen
+mailboxes =[Gmail]/Spam
+mailboxes ='[Gmail]/All Mail'

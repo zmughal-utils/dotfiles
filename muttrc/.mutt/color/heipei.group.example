@@ -1,0 +1,10 @@
+color index color120 color235 "%L family"
+color index color130 color235 "%L friend"
+
+color index color69 color233 "%L social"
+color index color33 color233 "~f facebookmail.com"
+color index color50 color233 "~f plus.google.com"
+
+color index color70 color233 "%L news"
+color index color80 color233 "%L commercial"
+color index color75 color233 "%L tech !%L news"

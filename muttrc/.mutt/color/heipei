@@ -1,0 +1,6 @@
+source ~/.mutt/color/heipei.orig
+source ~/.mutt/color/heipei.group
+
+color header		color100	color233	"^(Message-ID):"
+color header		color120	color233	"^(X-Label):"
+color body		cyan		color233	"https://[^ >]*"

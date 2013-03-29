@@ -1,0 +1,30 @@
+# Gmail .muttrc
+# http://shreevatsa.wordpress.com/2007/07/31/using-gmail-with-mutt-the-minimal-way/
+
+set folder = "imap://localhost:10143"
+#set folder = "imaps://imap.googlemail.com:993"
+#set folder = "imap://localhost:1439" # stunnel </etc/stunnel/stunnel.conf>
+set spoolfile = "+INBOX"
+set postponed="+[Gmail]/Drafts"
+#set imap_keepalive=300
+#set ssl_starttls=no
+macro index,pager ,i	"<change-folder>=INBOX<return>"	"Open Inbox"
+macro index,pager ,s	"<change-folder>=[Gmail]/Sent\Cv<space>Mail<return>"	"Open sent mail"
+macro index,pager ,S	"<change-folder>=[Gmail]/Spam<return>"	"Open spam"
+macro index,pager \\S	"<tag-prefix><save-message>=[Gmail]/Spam<return>"	"Send to spam"
+macro index,pager ,A	"<change-folder>=[Gmail]/All\Cv<space>Mail<return>"	"Open all mail"
+
+set move = no
+
+# NOTE: for some reason this line somtimes causes the connection to fail with:
+# tls_socket_read (A TLS packet with unexpected length was received.)
+#set imap_check_subscribed
+
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+# bug for when a folder has a period in the name
+# http://lists.df7cb.de/mutt/message/20090601.013609.d402c3aa.en.html
+set imap_delim_chars = '/'

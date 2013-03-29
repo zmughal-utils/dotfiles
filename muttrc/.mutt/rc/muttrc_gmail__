@@ -1,0 +1,9 @@
+# Gmail .muttrc
+# http://shreevatsa.wordpress.com/2007/07/31/using-gmail-with-mutt-the-minimal-way/
+
+source ~/.mutt/rc/muttrc_common
+source ~/.mutt/rc/muttrc_gmail_common__
+source ~/.mutt/rc/private/muttrc_gmail
+source ~/.mutt/rc/private/muttrc_currentsem
+
+source ~/.mutt/rc/private/muttrc_gmail_mailboxes_gen

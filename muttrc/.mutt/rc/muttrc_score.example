@@ -1,0 +1,54 @@
+score "~A"	50
+
+## Add a point to new messages
+score "~N" 50
+
+# Newer than one day
+#score "~d <1d" 40
+# Newer than one day
+#score "~d <2d" 30
+# Newer than one day
+#score "~d <3d" 20
+# Newer than a week
+score "~d <1w" 3
+# Newer than a 2 weeks
+score "~d <2w" 4
+# The above two date scores combine
+
+## Add a point to GPG signed messages
+score "~g" 1
+## Add a point to GPG encrypted messages
+score "~G" 1
+
+## Add a point to Flagged messages
+score "~F" 6
+
+## Add a point to messages from a known mailing list 
+## * Use the, `subscribe' and `lists' command to tell mutt about lists
+score "~l" 1
+
+## Add a point to old (unread) messages
+score "~O" 8
+
+## messages addressed to you 
+score "~p" 40
+
+## messages from you
+score "~P" 1
+
+## messages you replied to (using mutt)
+score "~Q" -10
+
+## read messages
+score "~R" -5
+
+## Add a point to messages less than 80,000 bytes 
+score "~z 0-80000" 5
+
+score "%L social"	-20
+score "%L news"		-25
+score "%L commercial"	-30
+score "%L music"	-25
+
+## older than a 6 months
+score "~d>6m" -50

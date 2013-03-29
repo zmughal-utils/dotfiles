@@ -1,0 +1,3 @@
+source ~/.mutt/rc/muttrc_common
+source ~/.mutt/rc/muttrc_gmail_common
+source ~/.mutt/rc/private/muttrc_cbl

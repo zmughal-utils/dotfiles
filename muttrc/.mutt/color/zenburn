@@ -1,0 +1,3 @@
+source ~/.mutt/color/zenburn.orig
+source ~/.mutt/color/zenburn.group
+color sidebar_new color109 color236
