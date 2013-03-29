@@ -1,0 +1,16 @@
+#!/bin/bash
+
+CURDIR=`dirname "$0"`
+FILE="$HOME/.mutt/tmp_limit"
+mkdir -p `dirname "$FILE"`
+. "$CURDIR/mutt_limit_gen.list"
+select limit in \
+	"${OPTIONS[@]}" \
+	;
+do
+	rm "$FILE"
+	limit=`echo $limit|cut -d: -f2`
+	echo "\"<enter-command>exec limit<return>$limit<return>\"" > "$FILE"
+	exit
+done;
+#	"Current semester : ~(~y 'UH 2011-2012')" \

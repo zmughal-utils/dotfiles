@@ -1,0 +1,3 @@
+#!/bin/sh
+MAILBOX=`echo "$@"| sed 's/ /\\\ /g'`
+echo "push echo\\ "$MAILBOX"<return>; exec shell-escape"

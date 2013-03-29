@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function cmd () {
+	format="$1"
+	rm "$FILE"
+	format=`echo $format|cut -d: -f2`
+	echo "\"<enter-command>set index_format=\\\"$format\\\"<return>\"" > "$FILE"
+}
+
+CURDIR=`dirname "$0"`
+FILE="$HOME/.mutt/tmp_index"
+NFILE="$HOME/.mutt/tmp_index.n"
+mkdir -p `dirname "$FILE"`
+. "$CURDIR/mutt_index_gen.list"
+if [ "$1" = "-n" ]; then
+	if [ -e $NFILE ]; then
+		N=`cat "$NFILE"`
+	else
+		N=0
+	fi
+	N=$(( ($N+1) % ${#OPTIONS[@]} ))
+	echo $N > "$NFILE"
+	cmd "${OPTIONS[$N]}"
+	exit
+else
+	select format in \
+		"${OPTIONS[@]}" \
+		;
+	do
+		cmd "$format"
+		exit
+	done;
+	#	"Current semester : ~(~y 'UH 2011-2012')" \
+fi

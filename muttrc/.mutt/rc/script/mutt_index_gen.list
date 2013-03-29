@@ -1,0 +1,11 @@
+WORDS="Default:%4C %Z %3N %{%b %d} %-15.15L (%?M?[%2M]&%4c?) %?y?{%-10.10y} ?%s
+Less:%4C %Z %3N %{%b %d} %-15.15L %s
+Less:%4C %Z %3N %-10.10L|%s
+Less:%3C %-10.10L|%?y?{%-10.10y} ?%s
+Less:%3C%Z%-10.10L|%?y?{%-10.10y} ?%s
+Less:%3C %-10.10L|%s
+Less:%s
+";
+IFS=$'\n'
+OPTIONS=( $WORDS )
+unset IFS

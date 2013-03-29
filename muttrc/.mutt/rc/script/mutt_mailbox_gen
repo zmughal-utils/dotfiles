@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use Net::IMAP::Simple;
+use IO::File;
+use 5.010;
+
+my $config_file = "$ENV{HOME}/.mutt/rc/private/muttrc_gmail";
+my $out_file = "$ENV{HOME}/.mutt/rc/private/muttrc_gmail_mailboxes_gen";
+my $config = new IO::File $config_file, 'r';
+my $out = new IO::File $out_file, 'w';
+
+my ($username,$password);
+
+while(my $line = <$config>)
+{
+	given($line) {
+		when(/imap_user = "([^"]*)"/) {
+			$username = $1;
+		}
+		when(/imap_pass = "([^"]*)"/) {
+			$password = $1;
+		}
+	}
+}
+
+# Create the object
+my $imap = Net::IMAP::Simple->new('imap.gmail.com', port=>993, use_ssl => 1 ) ||
+	die "Unable to connect to IMAP: $Net::IMAP::Simple::errstr\n";
+
+# Log on
+if(!$imap->login($username,$password)){
+	print STDERR "Login failed: " . $imap->errstr . "\n";
+	exit(64);
+}
+
+my @boxes   = $imap->mailboxes;
+for my $box (@boxes) {
+	my ($unseen, $recent, $num_messages) = $imap->status($box);
+	next unless defined $num_messages;
+	$box =~ s/&-/&/;
+	say $box;
+	print $out "mailboxes =\"$box\"\n" if $unseen + $recent > 0;
+}
+
+$imap->quit;

@@ -1,0 +1,27 @@
+WORDS="All (clear): \\Cu~A
+Flagged : ~F
+Family : %L family
+Friends : %L friend
+Current semester : ~(~y 'UH 2012-2013')
+Thesis : ~(~y 'UH senior thesis')
+CBL : ~(~y 'UH CBL')
+No tech/social lists: !~(%L tech || %L social)
+No lists: !~(~y list/)
+Just lists: ~(~y list/)
+Threaded messages : ~(!~$)
+Unlabelled : ~(!~y .)
+Not me : !~P
+(New/old/flagged, but not deleted) or (less than a week, but not replied to) : ((~N|~O|~F)!~D)|(~d<1w!~Q)
+New : ~N
+New/old : (~N|~O)
+Tagged (clear): \\Cu~T
+Delete (clear) : \\Cu~D
+Today's : ~d<1d
+Yesterday's : ~d<2d ~d>1d
+CougarCS : ~y CougarCS
+CougarCS lists : ~y list/CougarCS
+Misc : !~P !~y CougarCS !~(~y list/) !~(~y 'UH 2012-2013') !%L family
+";
+IFS=$'\n'
+OPTIONS=( $WORDS )
+unset IFS
