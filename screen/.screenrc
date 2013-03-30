@@ -1,0 +1,79 @@
+# screen(1)
+#
+shelltitle '$ |sh'
+altscreen on
+defutf8 on
+defencoding UTF-8
+
+# From <http://www.frexx.de/xterm-256-notes/> {{{
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# tell screen how to set colors. AB = background, AF=foreground
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# erase background with current bg color
+defbce "on"
+# }}}
+
+startup_message off
+defscrollback 5000
+
+nethack on
+
+
+# do not need the lock feature
+bind x meta
+
+# Modified from <http://linuxgazette.net/168/silva.html> {{{
+hardstatus alwayslastline
+hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{g}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%0c %{g}]'
+# }}}
+
+# caption string "%F%{gb}%:%{kg}%?%3n %t"
+# Modified from <http://www.softpanorama.org/Utilities/Screen/screenrc_examples.shtml> {{{
+caption string "%?%F%{.rw}%?%3n %t%? [%h]%?"
+# }}}
+sorendition    kg # black  on bold green
+
+windowlist string "%3n %t%? [%h]%?%=%f"
+
+# vi-like region navigation
+bind j focus down
+bind k focus up
+bind h focus top
+bind l focus bottom
+
+# <http://snarfed.org/synchronizing_gnu_screens_paste_buffer_and_the_x_selection>
+#bind y eval "stuff ' '" writebuf "exec sh -c 'xsel < ~/tmp/screen-exchange'"
+bind y eval writebuf "exec sh -c 'xsel < ~/tmp/screen-exchange'"	# stuff not needed in screen 4.01
+
+# make sure that
+# chmod 700 ~/tmp
+bufferfile $HOME/tmp/screen-exchange
+
+# bug #24208, hardcopy doesn't handle Unicode <https://savannah.gnu.org/bugs/?24208>
+#bind v eval "hardcopy $HOME/screen.temp" "screen -t vim.screen sh -c 'pipe.vim +\"normal }jzt\" +\"set number\" +\"setf txt\" +\"set laststatus=0\" < $HOME/screen.temp'"
+# workaround
+bind v eval "copy" "stuff 'H\015\044L\044\015'" writebuf "screen -t vim.screen sh -c 'pipe.vim +\"normal }jzt\" +\"set number\" +\"setf txt\" +\"set laststatus=0\" < ~/tmp/screen-exchange'" "readbuf /dev/null" "echo ''"
+# need to clear paste at end
+bind u eval "copy" "stuff 'H\015\044L\044\015'" writebuf "screen -t urlview.screen sh -c 'urlview < ~/tmp/screen-exchange'" "readbuf /dev/null" "echo ''"
+
+logfile screenlog.%n
+#bind v eval "exec sh -c 'rm $HOME/screen.tmp'" "logfile $HOME/screen.temp" "log on" "stuff \014" redisplay "screen -t vim.screen sh -c 'sleep 5; vim +\"set nomodeline\" +\"set number\" +\"set laststatus=0\" +\"syn on\" +\"AnsiEsc\" $HOME/screen.temp'; rm $HOME/screen.temp" "logfile screenlog.%n"
+#bind v eval "logfile $HOME/screen.temp" "log on" "logfile screenlog.%n"
+
+#eval screen "exec screenwm init"
+
+# setenv DISPLAY :0
+
+# Turn off visual bell
+#vbell_msg ""
+#vbellwait 0
+
+bind '"' eval "windowlist -b" "stuff a" "stuff a" "stuff a"
+	# show windowlist from toplevel
+bind 'W' windowlist -b
+
+#bind 'I' eval "colon" "stuff 'eval \"exec !vim_digraph \"  readbuf \"paste .\"'"
+
+# vim:fdm=marker

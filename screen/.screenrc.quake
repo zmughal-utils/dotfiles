@@ -1,0 +1,56 @@
+source ~/.screenrc
+term screen-256color
+#sessionname Screen_Quake
+
+at 0 number 1
+screen -t /top    0 //group
+at 1 kill
+
+screen -t /org    90 //group
+	at 90 group /top
+screen -t /comm   91 //group
+	at 91 group /top
+screen -t /net    92 //group
+	at 92 group /top
+screen -t /snd    93 //group
+	at 93 group /top
+screen -t /daemon 94 //group
+	at 94 group /top
+screen -t wyrd		1 sh -c "chmod 600 ~/.reminders; wyrd ; bash"
+	at 1 group /org
+#screen -t mutt		2 sh -c "~/bin/mutt -F ~/.mutt/rc/muttrc_gmail__; bash"
+#screen -t mutt		2 sh -c "~/.mutt/rm_cache && mutt; bash"
+screen -t mutt		2 sh -c "while true; do mutt; reset; done; bash" # //comm
+	at 2 group /comm
+screen -t v_msc		3 sh -c "~/bin/.screenrc.quake.vim_start ; bash" # //org
+	at 3 group /org
+screen -t mix		4 sh -c "alsamixer ; bash" # //snd
+	at 4 group /snd
+screen -t xmms2		5 sh -c "xmms2 status ; bash" #//snd
+	at 5 group /snd
+#screen -t shfm		5 sh -c "shell-fm ; bash" #//snd
+	#at 5 group /snd
+screen -t irssi		6 bash -lc "irssi_remote ; bash" #//comm
+	at 6 group /comm
+#screen -t slrn		7 sh -c "slrn ; bash"
+#screen -t slrn_gwene	8 sh -c "slrn_gwene ; bash"
+screen -t "net-c"	9 sh -c "~/script/network-cmd ; bash" #//net
+	at 9 group /net
+screen -t mutt_cs	10 sh -c "while true; do mutt -F ~/.mutt/rc/muttrc_cougarcs; reset; done; bash" #//comm
+	at 10 group /comm
+#screen -t slrn_gmane	11 sh -c "slrn_gmane ; bash"
+#screen -t ocp		12 sh -c "ocp-curses ; bash"
+screen -t "gil"	29 sh -c "~/repo/gmail-imap-label/bin/gmail-imap-label; bash" #//daemon
+	at 29 group /daemon
+screen -t "n::p" 30  sh -c "if [ `hostname` = 'quadra' ] && [ -x ~/sw_projects/nntp-portal/nntp-portal/bin/test_server.pl ]; then cd ~/sw_projects/nntp-portal/nntp-portal/ && ./bin/test_server.pl; bash; fi" #//daemon
+	at 30 group /daemon
+screen -t "slrn_p"  31  sh -c "if [ `hostname` = 'quadra' ] && [ -x ~/sw_projects/nntp-portal/nntp-portal/bin/test_server.pl ]; then sleep 60; cd ~/sw_projects/nntp-portal/nntp-portal/ && ../testing_code/slrn/slrn_portal.sh; bash; fi" #//comm
+	at 31 group /comm
+screen -t "fbpc"  32  sh -c "if [ `hostname` = 'quadra' ] && [ -x ~/sw_projects/fb-poke-cannon/fb-poke-cannon/bin/fb-poke-cannon.pl ]; then ~/sw_projects/fb-poke-cannon/fb-poke-cannon/bin/fb-poke-cannon.pl; bash; fi" #//daemon
+	at 32 group /daemon
+
+bind @   eval 'source ~/.screenrc.2view' 'select 2' 'focus' 'select 3' 'focus' 'select 6' 'focus' 'select 5' 'focus'
+bind '#' eval 'source ~/.screenrc.3view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
+bind $   eval 'source ~/.screenrc.4view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
+
+# vim:ft=screen

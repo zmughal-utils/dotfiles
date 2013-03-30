@@ -1,0 +1,15 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR"
+CUR="`pwd -P`"
+ln -sf "$CUR/.screenrc"                  "$HOME"
+ln -sf "$CUR/.screenrc.quake"            "$HOME"
+ln -sf "$CUR/.screenrc.4view"            "$HOME"
+ln -sf "$CUR/.screenrc.3view"            "$HOME"
+ln -sf "$CUR/.screenrc.2view"            "$HOME"
+ln -sf "$CUR/screen_quake"               "$HOME/bin"
+ln -sf "$CUR/.screenrc.quake.mutt_start" "$HOME/bin"
+ln -sf "$CUR/.screenrc.quake.vim"        "$HOME"
+ln -sf "$CUR/.screenrc.quake.vim_start"  "$HOME/bin"
+ln -sf "$CUR/screen256"                  "$HOME/bin"

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+vim --servername ScreenQuake-Vim -S ~/.screenrc.quake.vim "$@"

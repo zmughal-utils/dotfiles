@@ -1,0 +1,17 @@
+#!/bin/sh
+
+keys
+cd $HOME
+if (screen -ls|grep -q Screen_Quake); then
+	screen -r -S Screen_Quake "$@"
+	exit
+fi
+# fork off
+( \
+sleep 3; \
+screen -S Screen_Quake -X source ~/.screenrc.quake; \
+screen -S Screen_Quake -X select /top; \
+) &
+screen -S Screen_Quake "$@"
+#screen -S Screen_Quake -X select 0; \
+#screen -S Screen_Quake -X kill; \

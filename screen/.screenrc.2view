@@ -1,0 +1,14 @@
+windowlist -b
+only
+split -v
+focus
+split
+windowlist -b
+focus
+windowlist -b
+split
+focus
+resize 7
+windowlist -b
+focus
+# vim:ft=screen

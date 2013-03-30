@@ -1,0 +1,1 @@
+/usr/bin/screen -T screen-256color "$@"
