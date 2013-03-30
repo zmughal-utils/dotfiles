@@ -43,6 +43,19 @@ bind k focus up
 bind h focus top
 bind l focus bottom
 
+# w + (1..0) goes to n-th region (1..10)
+bind q command -c region_select
+bind -c region_select 1 eval 'focus top'
+bind -c region_select 2 eval 'focus top' 'focus'
+bind -c region_select 3 eval 'focus top' 'focus' 'focus'
+bind -c region_select 4 eval 'focus top' 'focus' 'focus' 'focus'
+bind -c region_select 5 eval 'focus top' 'focus' 'focus' 'focus' 'focus'
+bind -c region_select 6 eval 'focus top' 'focus' 'focus' 'focus' 'focus' 'focus'
+bind -c region_select 7 eval 'focus top' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus'
+bind -c region_select 8 eval 'focus top' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus'
+bind -c region_select 9 eval 'focus top' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus'
+bind -c region_select 0 eval 'focus top' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus' 'focus'
+
 # <http://snarfed.org/synchronizing_gnu_screens_paste_buffer_and_the_x_selection>
 #bind y eval "stuff ' '" writebuf "exec sh -c 'xsel < ~/tmp/screen-exchange'"
 bind y eval writebuf "exec sh -c 'xsel < ~/tmp/screen-exchange'"	# stuff not needed in screen 4.01
