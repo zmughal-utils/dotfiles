@@ -43,8 +43,8 @@ bind k focus up
 bind h focus top
 bind l focus bottom
 
-# w + (1..0) goes to n-th region (1..10)
-bind q command -c region_select
+# m + (1..0) goes to n-th region (1..10)
+bind m command -c region_select
 bind -c region_select 1 eval 'focus top'
 bind -c region_select 2 eval 'focus top' 'focus'
 bind -c region_select 3 eval 'focus top' 'focus' 'focus'
