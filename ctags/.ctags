@@ -1,0 +1,68 @@
+--c-kinds=+p
+
+--langdef=latex
+--langmap=latex:.tex
+
+--regex-latex=/^\\part[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/PART \2/s,part/
+--regex-latex=/^\\part[[:space:]]*\*[[:space:]]*\{([^}]+)\}/PART \1/s,part/
+
+--regex-latex=/^\\chapter[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/CHAP \2/s,chapter/
+--regex-latex=/^\\chapter[[:space:]]*\*[[:space:]]*\{([^}]+)\}/CHAP \1/s,chapter/
+
+--regex-latex=/^\\section[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/\. \2/s,section/
+--regex-latex=/^\\section[[:space:]]*\*[[:space:]]*\{([^}]+)\}/\. \1/s,section/
+
+--regex-latex=/^\\subsection[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/\.\. \2/s,subsection/
+--regex-latex=/^\\subsection[[:space:]]*\*[[:space:]]*\{([^}]+)\}/\.\. \1/s,subsection/
+
+--regex-latex=/^\\subsubsection[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/\.\.\. \2/s,subsubsection/
+--regex-latex=/^\\subsubsection[[:space:]]*\*[[:space:]]*\{([^}]+)\}/\.\.\. \1/s,subsubsection/
+
+--regex-latex=/^\\includegraphics[[:space:]]*(\[[^]]*\])?[[:space:]]*(\[[^]]*\])?[[:space:]]*\{[[:space:]]*([^}]+)[[:space:]]*\}/\3/g,Graphics/
+--regex-latex=/^\\lstinputlisting[[:space:]]*(\[[^]]*\])?[[:space:]]*(\[[^]]*\])?[[:space:]]*\{[[:space:]]*([^}]+)[[:space:]]*\}/\3/i,Listings/
+--regex-latex=/^\\input[[:space:]]*\{([^}]+)\}/\1/i,Input/
+
+--regex-latex=/^\\frametitle[[:space:]]*(\[[^]]*\])?[[:space:]]*\{([^}]+)\}/-\2/s,frame/
+
+--regex-latex=/\\label[[:space:]]*\{([^}]+)\}/\1/l,label/
+--regex-latex=/\\ref[[:space:]]*\{([^}]+)\}/\1/r,ref/
+--regex-latex=/\\pageref[[:space:]]*\{([^}]+)\}/\1/p,pageref/
+--regex-latex=/\\bibitem[[:space:]]*\[([^]]*)\]\{([^}]+)\}/\1 \2/b,bibitem/
+
+--langdef=bib
+--langmap=bib:.bib
+--regex-bib=/@([Aa]rticle|[Uu]npublished|[Bb]ook|[Bb]ooklet|[Ii]nbook|[Ii]ncollection|[Ii]nproceedings|[Mm]anual|[Mm]asterthesis|[Mm]isc|[Pp]hdthesis|[Pp]roceedings|[Tt]echreport|UNPUBLISHED|ARTICLE|BOOK|BOOKLET|INBOOK|INCOLLECTION|INPROCEEDINGS|MANUAL|MASTERTHESIS|MISC|PHDTHESIS|PROCEEDINGS|TECHREPORT|UNPUBLISHED)\{([^,]+),/\2 [\1]/e,BibTeX-Entries/
+--regex-bib=/@(STRING|[Ss]tring)\{([^ "#%')(,=}{]+)/\2/s,BibTeX-Strings/
+--regex-bib=/[[:space:]]*([Aa]uthor|AUTHOR)[[:space:]]*=[[:space:]]*("([^"]+)"|\{([^\}]+)\})[[:space:]]*,?[[:space:]]*$/\3\4/a,BibTeX-Authors/
+--regex-bib=/[[:space:]]*([Tt]itle|TITLE)[[:space:]]*=[[:space:]]*["\{](\{[:word:]+\}.+|.+)(["}][[:space:]]*,[[:space:]]*$|$)/\2/t,BibTeX-Titles/
+
+--regex-make=/^([^:# \t]+)[ \t]*[:]{1,2}[^=]/\1/t,targets/
+
+--langdef=bc
+--langmap=bc:.bc
+--regex-bc=/define[[:space:]]+([[:alpha:]][[:alnum:]_]*)[[:space:]]*\([^)]*\)/\1/f,function definintion/
+
+--langdef=prolog
+--langmap=prolog:.prolog.pro
+--regex-prolog=/^([a-z][a-zA-Z0-9_]*[ \t]*(\([^:.]*\))?)[ \t]*(:-|\.)/\1/p,predicate/
+--regex-prolog=/^:- ?foreign\(([a-z][a-zA-Z0-9_]*)[ \t,(]/\1/f,foreign/
+--regex-prolog=/^:- ?dynamic\(([a-z][a-zA-Z0-9_]*)\//\1/d,dynamic/
+
+--langmap=perl:+.pod
+--regex-perl=/^\s*has\s+['"]?([0-9a-zA-Z_]+)/\1/a,attribute/
+--regex-perl=/^\s*with\s+(['"])(.+)\1/\2/r,role/
+--regex-perl=/^\s*extends\s+(['"])(.+)\1/\2/e,extends/
+--regex-perl=/^\s*use\s+([^ ;]+)/\1/u,use/
+--regex-perl=/^\s*method\s+([^ ({]+)/\1/m,method/
+--regex-perl=/^\s*requires\s+(['"])(.+)\1/\2/q,requires/
+--regex-perl=/^=head1[[:space:]]*(.+)/\1/o,pod/
+--regex-perl=/^=head2[[:space:]]*(.+)$/. \1/o,pod/
+--regex-perl=/^=head3[[:space:]]*(.+)$/.. \1/o,pod/
+--regex-perl=/^=head4[[:space:]]*(.+)$/... \1/o,pod/
+--regex-perl=/^=item[[:space:]]*(.+)$/-> \1/o,pod/
+--regex-perl=/^=for[[:space:]]+([^:]+):(.*)$/*\1:\2/o,pod/
+--regex-perl=/^__(DATA|END)__$/__\1__/l,label/
+
+--langdef=text
+--langmap=text:.txt
+--regex-text=/^(([0-9]+.)+[[:space:]]+.*)/\1/t,toc/
