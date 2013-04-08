@@ -1,0 +1,70 @@
+use lib 'lib';
+use feature qw(say);
+use Term::ANSIColor;
+#use MooseX::AttributeHelpers::Collection::Array;
+#use MooseX::AttributeHelpers::String;
+#use MooseX::AttributeHelpers::Meta::Method::Provided;
+
+no warnings 'redefine';
+no strict;
+
+our @plugins = (
+    #'ReadLineHistory',            # history saved across sessions
+    'Colors',                     # colorize return value and errors
+    'FancyPrompt',                # provide an irb-like prompt
+    'Refresh',                    # refresh before every eval
+    'Interrupt',                  # improve handling of ^C
+    'OutputCache',                # access previous results
+    'Nopaste',                    # paste session with #nopaste
+    'DDC',                        # format output with Data::Dumper::Concise
+    'PPI',                        # PPI dumping of Perl code
+    'MultiLine::PPI',             # allow multiple lines
+    'Completion',
+    'CompletionDriver::Keywords', # substr, while, etc
+    'CompletionDriver::LexEnv',   # current environment
+    'CompletionDriver::Globals',  # global variables
+    'CompletionDriver::INC',      # loading new modules
+    'CompletionDriver::Methods',  # class method completion
+    'CompletionDriver::Turtles',  # turtle command completion
+    'DataPrinter',
+    'Editor',
+    #'LazyLoad',
+);
+init_repl($_REPL) if $_REPL;
+$Devel::REPL::Plugin::Packages::PKG_SAVE = 'main';
+
+sub init_repl {
+my $_REPL = shift;
+$_REPL->load_plugin($_) for @plugins;
+
+
+#$_REPL->lazy_load('File::Slurp' => qw/read_file write_file/); # for
+                                                              ## Exporter-style
+                                                              ## modules
+#$_REPL->lazy_load('DateTime'); # for OO-style modules
+#$_REPL->lazy_load('DDP' => qw/p/);
+#$_REPL->lazy_load('WWW::Mechanize');
+#$_REPL->lazy_load('PDL' => qw/pdl/);
+
+$_REPL->normal_color('magenta');
+$_REPL->fancy_prompt(sub {
+    my $self = shift;
+    my $p = $self->current_package;
+    color('reset') .
+    color('green') . $self->line_depth . ':' . $p . '$ ' .
+    color('reset');
+} );
+$_REPL->dataprinter_config({
+	stringify => {
+		'PDL::Char' => 0,
+		'PDL::Complex' => 0,
+		#'DateTime' => 0,
+	},
+});
+}
+
+
+END {
+ print "\n";
+}
+# vim:ft=perl

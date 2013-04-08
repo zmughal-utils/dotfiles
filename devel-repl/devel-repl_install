@@ -1,0 +1,6 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR"
+CUR="`pwd -P`"
+ln -Tsf "$CUR/.re.pl" "$HOME/.re.pl"
