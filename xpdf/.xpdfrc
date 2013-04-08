@@ -1,0 +1,31 @@
+# xpdf(1) configuration
+
+# System settings
+include /etc/xpdf/xpdfrc
+
+initialZoom width
+
+#continuousView yes
+
+# viKeys
+bind h any scrollLeft(16)
+bind l any scrollRight(16)
+bind k any scrollUp(16)
+bind j any scrollDown(16)
+
+bind 4 any scrollLeft(16)
+bind 6 any scrollRight(16)
+bind 8 any pageUp
+bind 2 any pageDown
+
+bind c any toggleContinuousMode
+bind s any toggleOutline
+bind B any toggleOutline
+
+bind ctrl-p any prevPageNoScroll
+bind ctrl-n any nextPageNoScroll
+
+bind ^ any scrollToLeftEdge
+bind $ any scrollToRightEdge
+bind ( any scrollToTopEdge
+bind ) any scrollToBottomEdge
