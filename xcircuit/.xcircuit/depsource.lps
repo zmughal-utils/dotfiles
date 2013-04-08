@@ -1,0 +1,30 @@
+%! PostScript set of library objects for XCircuit
+%  Version: 3.6
+%  Library name is: (user)
+%  Author: Zaki Mughal,,, <zaki@zakibox>
+%
+
+
+% XCircuitLib library objects
+
+/depsource::depisource {
+begingate
+1 1.000 0 48 -32 0 0 -48 32 0 0 48 5 polygon
+1 1.000 0 64 0 48 2 polygon
+1 1.000 0 -48 0 -64 2 polygon
+1 0.750 0 20 0 -8 2 polygon
+0.800 180 0 -20 generic::arrowhead
+endgate
+} def
+
+/depsource::depvsource {
+begingate
+1 1.000 0 48 -32 0 0 -48 32 0 0 48 5 polygon
+1 1.000 0 64 0 48 2 polygon
+1 1.000 0 -48 0 -64 2 polygon
+(+) {/Symbol cf} 2 5 0 1.000 0 14 label
+(-) {/Symbol cf} 2 5 0 1.000 0 -22 label
+endgate
+} def
+
+% EndLib

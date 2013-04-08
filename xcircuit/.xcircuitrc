@@ -1,0 +1,21 @@
+global env
+
+set XCOps(liboverride) 1
+# From /usr/share/xcircuit/xcstartup.tcl {{{
+library make Generic
+library 1 load generic.lps
+library 1 load analog.lps
+library 1 load avlsi.lps
+library 1 load digital.lps
+library 1 load digitaltcl.lps
+
+library make AnalogLib
+library 2 load analoglib3.lps
+# }}}
+
+library make Mine
+library 3 load $env(HOME)/.xcircuit/depsource.lps
+library 3 load $env(HOME)/.xcircuit/contrib/switches.lps
+library 3 load $env(HOME)/.xcircuit/contrib/liec_dc.lps
+
+# vim:ft=tcl:fdm=marker
