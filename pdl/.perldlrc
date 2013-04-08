@@ -1,0 +1,8 @@
+#!/usr/bin/env perl
+
+require "$ENV{HOME}/.re.pl/repl.rc";
+init_repl($_REPL) if $_REPL;
+$_REPL->eval('do_print') if $_REPL;
+$_REPL->eval('push @PDLLIB, "."') if $_REPL;
+
+1;
