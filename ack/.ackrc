@@ -1,0 +1,9 @@
+# ack-grep(1p)
+--type-add
+tex=.bib
+
+--type-set
+markdown=.mdwn
+
+--type-set
+ikiwiki=.mdwn
