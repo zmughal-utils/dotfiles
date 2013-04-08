@@ -1,0 +1,30 @@
+#!/bin/bash
+
+function cmd () {
+	N="$1"
+	rm -f "$FILE" 2>/dev/null
+	NP=$((N+1))
+	limit="~(~d >${N}d ~d <${NP}d)"
+	echo "\"<enter-command>exec limit<return>$limit<return><enter-command>set my_display_day=$N<return>\"" > "$FILE"
+	if [ $N -gt 0 ]; then
+		echo $N > $NFILE
+	fi
+}
+
+CURDIR=`dirname "$0"`
+FILE="$HOME/.mutt/tmp_display_day"
+NFILE="$HOME/.mutt/tmp_display_day.n"
+mkdir -p `dirname "$FILE"`
+N=`cat $NFILE 2>/dev/null`
+if [ "$1" = "-n" ]; then
+	N=$(( $N+1 ))
+	cmd "$N" 
+	exit
+else
+	if [ -z $N ]; then
+		N=1;
+	fi
+	N=$(( $N-1 ))
+	cmd "$N" 
+	exit
+fi

@@ -96,6 +96,7 @@ macro index ,O	'<enter-command>exec limit<return>!%L<space>friend<space>!%L<spac
 macro index,pager \\D	"<tag-prefix><clear-flag>O<sync-mailbox><tag-prefix><delete-message>"	"Mark as read and delete"
 
 # <http://www.mail-archive.com/mutt-users@mutt.org/msg38662.html>
+# <http://comments.gmane.org/gmane.mail.mutt.user/32947> - download this thread for later
 #folder-hook . 'set my_oldrecord=$record; set record=^; set my_folder=$record; set record=$my_oldrecord'
 #folder-hook . 'macro index Z :push\ \":\\\`$HOME/.mutt/rc/script/cs-mutt-per-folder\ $my_folder\\\`\\\<enter\\\>\"<enter>; push Z'
 
@@ -118,5 +119,21 @@ macro index,pager <F2> "<enter-command>set my_wait_key=$wait_key<enter>\
 <enter-command>set wait_key=$my_wait_key<enter>\
 <enter-command>push \`cat $HOME/.mutt/tmp_index\`<enter>" "Index switcher"
 
+set my_display_day=0
+macro index,pager <F5> "<enter-command>set my_wait_key=$wait_key<enter>\
+<shell-escape>rm -f $HOME/.mutt/tmp_display_day.n<enter>\
+<enter-command>set wait_key=$my_wait_key<enter>"
+macro index,pager <F3> "<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<enter-command>set my_display_day=\"\`$HOME/.mutt/rc/script/mutt_display_day_gen<space>-n<space>$my_display_day\`\"<enter>\
+<enter-command>set wait_key=$my_wait_key<enter>\
+<enter-command>push \`cat $HOME/.mutt/tmp_display_day\`<enter>" "Index switcher"
+macro index,pager <F4> "<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<enter-command>set my_display_day=\"\`$HOME/.mutt/rc/script/mutt_display_day_gen<space>-N<space>$my_display_day\`\"<enter>\
+<enter-command>set wait_key=$my_wait_key<enter>\
+<enter-command>push \`cat $HOME/.mutt/tmp_display_day\`<enter>" "Index switcher"
+
 macro index ,,h	'<shell-escape>~/.mutt/rc/script/rm_cache<return>'	"remove cached headers"
+macro index ,,t '<enter-command>exec untag-pattern<return>~A<return><tag-thread><enter-command>exec limit<return>~T<return><tag-thread>'	"remove cached headers"
 
