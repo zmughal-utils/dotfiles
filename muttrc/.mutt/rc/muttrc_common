@@ -86,7 +86,7 @@ source ~/.mutt/rc/private/muttrc_alternate
 source ~/.mutt/rc/private/muttrc_group
 source ~/.mutt/rc/private/muttrc_hdr
 source ~/.mutt/rc/private/muttrc_score
-source ~/.mutt/rc/private/muttrc_list
+#source ~/.mutt/rc/private/muttrc_list
 
 macro index ,a	'<enter-command>exec limit<return>~A<return>'	"All mail"
 macro index ,N	'<enter-command>exec limit<return>~(~O|~N|~F)<return>'	"Old, new, flagged"
