@@ -27,6 +27,8 @@ set mail_check=60	# one minute; for slow connections
 #set mail_check=15
 set timeout=45
 
+set tmpdir=~/.mutt/tmp_mail/
+
 auto_view text/html
 alternative_order text/enriched text/plain text application/postscript image/*
 

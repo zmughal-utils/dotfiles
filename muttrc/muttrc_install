@@ -4,6 +4,7 @@ CURDIR=`dirname "$0"`
 cd "$CURDIR"
 CUR="`pwd -P`"
 mkdir ~/.mutt >/dev/null 2>&1
+mkdir ~/.mutt/tmp_mail >/dev/null 2>&1
 ln -Tsf "$CUR/.mutt/color"      "$HOME/.mutt/color"
 ln -Tsf "$CUR/.mutt/rc"         "$HOME/.mutt/rc"
 ln -sf ~/.mutt/rc/muttrc_gmail ~/.muttrc
