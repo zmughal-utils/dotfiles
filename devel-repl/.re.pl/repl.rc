@@ -51,8 +51,9 @@ $_REPL->fancy_prompt(sub {
     my $self = shift;
     my $p = $self->current_package;
     color('reset') .
-    color('green') . $self->line_depth . ':' . $p . '$ ' .
-    color('reset');
+    color('green') . $self->line_depth . ':' . $p .
+    color('reset') .
+    "\n" . '$ ';
 } );
 $_REPL->dataprinter_config({
 	stringify => {
