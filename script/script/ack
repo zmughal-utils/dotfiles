@@ -1,0 +1,14 @@
+#!/bin/sh
+
+ACK="/usr/bin/ack"
+if which ack-grep 2>&1 > /dev/null; then
+	ACK="/usr/bin/ack-grep"
+fi
+ARGS="$@"
+#if echo "$ARGS" | grep -q '.*-H.*-g.*' ; then
+	#ARGS=$(echo "$ARGS" | sed 's,-H ,,')
+	#ARGS=$(echo "$ARGS" | sed 's,--column ,,')
+	## lazy fix for <https://github.com/mileszs/ack.vim/issues/80>
+	# patched in vim
+#fi
+$ACK $ARGS
