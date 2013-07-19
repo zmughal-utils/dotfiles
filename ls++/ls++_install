@@ -1,0 +1,7 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR"
+export CUR="`pwd -P`"
+mkdir ~/.config/ls++ >/dev/null 2>&1
+ln -sf "$CUR/ls++.conf" "$HOME/.config/ls++/"
