@@ -52,5 +52,6 @@ screen -t "fbpc"  32  sh -c "if [ `hostname` = 'quadra' ] && [ -x ~/sw_projects/
 bind @   eval 'source ~/.screenrc.2view' 'select 2' 'focus' 'select 3' 'focus' 'select 6' 'focus' 'select 5' 'focus'
 bind '#' eval 'source ~/.screenrc.3view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
 bind $   eval 'source ~/.screenrc.4view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
+bind %   eval 'source ~/.screenrc.5view' 'select 3' 'focus' 'select 4' 'focus' 'select 6' 'focus' 'select 2' 'focus' 'select 5' 'focus'
 
 # vim:ft=screen

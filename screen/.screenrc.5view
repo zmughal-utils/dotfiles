@@ -1,0 +1,27 @@
+windowlist -b
+only
+split
+focus
+windowlist -b
+resize 20 # make bottom windows 20 lines high
+focus top # back to first
+split -v # pane to the right
+focus
+windowlist -b
+focus # back to bottom
+windowlist -b
+split -v
+focus
+windowlist -b
+split
+focus
+windowlist -b
+resize 1
+focus top
+windowlist -b
+focus
+windowlist -b
+resize 100
+focus top
+windowlist -b
+# vim:ft=screen
