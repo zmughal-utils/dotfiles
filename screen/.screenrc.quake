@@ -1,4 +1,5 @@
 source ~/.screenrc
+hardstatus off
 term screen-256color
 #sessionname Screen_Quake
 
@@ -53,5 +54,7 @@ bind @   eval 'source ~/.screenrc.2view' 'select 2' 'focus' 'select 3' 'focus' '
 bind '#' eval 'source ~/.screenrc.3view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
 bind $   eval 'source ~/.screenrc.4view' 'select 3' 'focus' 'select 2' 'focus' 'select 6' 'focus' 'select 5' 'focus'
 bind %   eval 'source ~/.screenrc.5view' 'select 3' 'focus' 'select 4' 'focus' 'select 6' 'focus' 'select 2' 'focus' 'select 5' 'focus'
+
+#hardstatus alwayslastline
 
 # vim:ft=screen

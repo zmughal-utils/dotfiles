@@ -25,8 +25,15 @@ nethack on
 bind x meta
 
 # Modified from <http://linuxgazette.net/168/silva.html> {{{
-hardstatus alwayslastline
-hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{g}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%0c %{g}]'
+#hardstatus off
+#hardstatus string "%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{g}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%0c %{g}]"
+# commented out because it makes screen crash?
+#hardstatus alwayslastline
+#
+bind E eval 'hardstatus alwayslastline' 'hardstatus string "%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{g}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%0c %{g}]"'
+bind e eval 'hardstatus off' 'hardstatus string ""'
+
+#exec sh -c 'sleep 20 && screen -X hardstatus alwayslastline'
 # }}}
 
 # caption string "%F%{gb}%:%{kg}%?%3n %t"
