@@ -139,3 +139,7 @@ macro index,pager <F4> "<enter-command>set my_wait_key=$wait_key<enter>\
 macro index ,,h	'<shell-escape>~/.mutt/rc/script/rm_cache<return>'	"remove cached headers"
 macro index ,,t '<enter-command>exec untag-pattern<return>~A<return><tag-thread><enter-command>exec limit<return>~T<return><tag-thread>'	"remove cached headers"
 
+macro index,attach,pager,compose ,,m	'<enter-command>set my_wait_key=$wait_key<enter>\
+<enter-command>unset wait_key<return>\
+<pipe-message>$HOME/.mutt/rc/script/grab-message-id<return>\
+<enter-command>set wait_key=$my_wait_key<enter>'	"grab Message-ID"
