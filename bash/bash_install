@@ -1,0 +1,11 @@
+#!/bin/sh
+
+CURDIR=`dirname "$0"`
+cd "$CURDIR"
+CUR="`pwd -P`"
+ln -Tsf "$CUR/.bash" "$HOME/.bash"
+ln -sf "$CUR/.bash_aliases" "$HOME"
+ln -sf "$CUR/.bash_completion" "$HOME"
+ln -sf "$CUR/.bash_logout" "$HOME"
+ln -sf "$CUR/.bash_profile" "$HOME"
+ln -sf "$CUR/.bashrc" "$HOME"
