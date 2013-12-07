@@ -1,0 +1,4 @@
+# see <http://stackoverflow.com/questions/7179642/how-can-i-make-bash-tab-completion-behave-like-vim-tab-completion>
+TAB: menu-complete
+"\e[Z": menu-complete-backward
+"\C-f": complete
