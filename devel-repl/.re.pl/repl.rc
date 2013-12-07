@@ -28,6 +28,7 @@ our @plugins = (
     'CompletionDriver::Turtles',  # turtle command completion
     'DataPrinter',
     'Editor',
+    'DumpHistory',
     #'LazyLoad',
 );
 init_repl($_REPL) if $_REPL;
