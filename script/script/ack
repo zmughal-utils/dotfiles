@@ -4,6 +4,9 @@ ACK="/usr/bin/ack"
 if which ack-grep 2>&1 > /dev/null; then
 	ACK="/usr/bin/ack-grep"
 fi
+if [ -f "/usr/local/bin/ack" ]; then
+	ACK="/usr/local/bin/ack"
+fi
 #ARGS="$@"
 #if echo "$ARGS" | grep -q '.*-H.*-g.*' ; then
 	#ARGS=$(echo "$ARGS" | sed 's,-H ,,')
