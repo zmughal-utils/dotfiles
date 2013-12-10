@@ -73,3 +73,9 @@
 --regex-coffee=/^[ \t]*(module\.)?(exports\.)?@?([_A-Za-z.]+):.*[-=]>.*$/\3/f,function/
 --regex-coffee=/^[ \t]*(module\.)?(exports\.)?([_A-Za-z.]+)[ \t]+=.*[-=]>.*$/\3/f,function/
 --regex-coffee=/^[ \t]*([A-Za-z.]+)[ \t]+=[^->\n]*$/\1/v,variable/
+
+--langdef=R
+--langmap=r:.R.r
+--regex-R=/^[ \t]*"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t]function/\1/f,Functions/
+--regex-R=/^"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/g,GlobalVars/ 
+--regex-R=/[ \t]"?([.A-Za-z][.A-Za-z0-9_]*)"?[ \t]*<-[ \t][^f][^u][^n][^c][^t][^i][^o][^n]/\1/v,FunctionVariables/
