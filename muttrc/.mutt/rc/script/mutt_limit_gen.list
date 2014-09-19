@@ -2,7 +2,7 @@ WORDS="All (clear): \\Cu~A
 Flagged : ~F
 Family : %L family
 Friends : %L friend
-Current semester : ~(~y 'UH 2012-2013')
+Current semester : ~(~y 'UH 2014-2015')
 Thesis : ~(~y 'UH senior thesis')
 CBL : ~(~y 'UH CBL')
 No tech/social lists: !~(%L tech || %L social)
@@ -20,8 +20,11 @@ Today's : ~d<1d
 Yesterday's : ~d<2d ~d>1d
 CougarCS : ~y CougarCS
 CougarCS lists : ~y list/CougarCS
-Misc : !~P !~y CougarCS !~(~y list/) !~(~y 'UH 2012-2013') !%L family
+Misc : !~P !~y CougarCS !~(~y list/) !~(~y 'UH 2014-2015') !%L family
+Conference : ~s CfP || ~s 'call for participation' || ~s 'call for papers' || ~s 'conference' || ~s 'submission deadline'
+Other: ~(~y .) ~(~d >2m) !~(~F) !~y "CBL" !~y "CougarCS" !~T !%P
 ";
 IFS=$'\n'
 OPTIONS=( $WORDS )
 unset IFS
+# Current semester : ~(~y 'UH 2013-2014')

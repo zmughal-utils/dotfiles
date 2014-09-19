@@ -58,6 +58,7 @@ $_REPL->fancy_prompt(sub {
 } );
 $_REPL->dataprinter_config({
 	stringify => {
+		'PDL' => 0,
 		'PDL::Char' => 0,
 		'PDL::Complex' => 0,
 		#'DateTime' => 0,

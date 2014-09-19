@@ -1,3 +1,4 @@
 #!/bin/sh
 # turn message-id header into mid: URI
-grep -im 1 "^message-id" | sed 's,^message-id:\s*,,i' | sed 's,^<,<mid:,' | xclip -i
+grep -i "^message-id" | sed 's,^message-id:\s*,,i' | sed 's,^<,<mid:,' | xclip -i
+# -m 1
